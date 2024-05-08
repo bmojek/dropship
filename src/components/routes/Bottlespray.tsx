@@ -6,25 +6,30 @@ import { CartContext } from "../contexts/CartContext";
 
 interface Props {
   menuCart: boolean;
-  setMenuCart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
+const Bottlespray: React.FC<Props> = ({ menuCart }) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
   const sliderRef = useRef<Slider>(null);
   const { addToCart } = useContext(CartContext);
-  const price = 99;
+  const price = 59;
+
   const thumbnails: { color: string; url: string }[] = [
-    { color: "czarny", url: "images/airCooler/airBlack.webp" },
-    { color: "biały", url: "images/airCooler/airWhite.webp" },
-    { color: "zielony", url: "images/airCooler/airGreen.webp" },
+    { color: "czarny", url: "images/bottleSpray/bottleBlack.webp" },
+    { color: "różowy", url: "images/bottleSpray/bottlePink.webp" },
+    { color: "zielony", url: "images/bottleSpray/bottleGreen.webp" },
+    { color: "niebieski", url: "images/bottleSpray/bottleBlue.webp" },
+    {
+      color: "niebieski-fiolet",
+      url: "images/bottleSpray/bottlePinkBlue.webp",
+    },
   ];
 
   const descPhotos: { url: string }[] = [];
 
-  for (let i = 1; i < 21; i++) {
-    descPhotos.push({ url: `images/airCooler/${i}.webp` });
+  for (let i = 1; i < 9; i++) {
+    descPhotos.push({ url: `images/bottleSpray/${i}.webp` });
   }
 
   const handleColorChange = (index: number, color: string) => {
@@ -39,13 +44,13 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
 
     if (selectedThumbnail)
       addToCart({
-        name: "Aircooler",
+        name: "BottleSpray",
         color: selectedColor,
         quantity: quantity,
         price: price,
         img: selectedThumbnail.url,
       });
-    setMenuCart(true);
+
     setSelectedColor("");
     setQuantity(1);
   };
@@ -71,7 +76,7 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
           <Slider className={`w-10/12 min-w-56 `} {...settings} ref={sliderRef}>
             <img
               className="rounded-3xl"
-              src="images/airCooler/firstCooler.webp"
+              src="images/bottleSpray/1.webp"
               alt=""
             />
             {thumbnails.map((thumbnail, index) => (
@@ -82,10 +87,12 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
           </Slider>
         </div>
         <div className="product pt-16">
-          <h1 className="text-4xl  font-semibold text-green-600">Aircooler</h1>
+          <h1 className="text-4xl  font-semibold text-green-600">
+            BottleSpray
+          </h1>
           <p className="p-3 font-semibold text-lg">
             {price},00zł{" "}
-            <span className="line-through font-normal">219,00zł</span>
+            <span className="line-through font-normal">119,00zł</span>
           </p>
           <p className="font-normal pl-2 pb-4 text-sm text-green-500">
             Zostało 10+ sztuk w magazynie
@@ -125,7 +132,8 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
           Pokonaj letnie upały w tym roku!
         </h1>
         <p className="pt-4">
-          Rozkoszuj się orzeźwiającym powiewem z naszym Aircooler
+          Dzięki naszemu BottleSpray 2 w 1 możesz ugasić pragnienie oraz
+          orzeźwić się niesamowitą mgiełką
         </p>
       </div>
       <div className="grid sm:grid-cols-2 gap-1 w-8/12 mx-auto">
@@ -141,4 +149,4 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
     </>
   );
 };
-export default Aircooler;
+export default Bottlespray;
