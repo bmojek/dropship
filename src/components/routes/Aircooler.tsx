@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CartContext } from "../contexts/CartContext";
+import { airBlack, airGreen, airWhite } from "../types/priceIdStripe";
 
 interface Props {
   menuCart: boolean;
@@ -11,6 +12,7 @@ interface Props {
 
 const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
+  const [showAlert, setShowAlert] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const sliderRef = useRef<Slider>(null);
   const { addToCart } = useContext(CartContext);
@@ -31,23 +33,36 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
     setSelectedColor(color);
     sliderRef.current?.slickGoTo(index + 1);
   };
+  const priceIds: Record<string, string> = {
+    czarny: airBlack,
+    biały: airWhite,
+    zielony: airGreen,
+  };
 
   const handleAddToCart = () => {
-    const selectedThumbnail = thumbnails.find(
-      (thumbnail) => thumbnail.color === selectedColor
-    );
+    if (selectedColor) {
+      setShowAlert(false);
+      const selectedThumbnail = thumbnails.find(
+        (thumbnail) => thumbnail.color === selectedColor
+      );
 
-    if (selectedThumbnail)
-      addToCart({
-        name: "Aircooler",
-        color: selectedColor,
-        quantity: quantity,
-        price: price,
-        img: selectedThumbnail.url,
-      });
-    setMenuCart(true);
-    setSelectedColor("");
-    setQuantity(1);
+      const priceId = priceIds[selectedColor];
+
+      if (selectedThumbnail)
+        addToCart({
+          name: "Aircooler",
+          color: selectedColor,
+          quantity: quantity,
+          price: price,
+          img: selectedThumbnail.url,
+          priceId: priceId,
+        });
+      setMenuCart(true);
+      setSelectedColor("");
+      setQuantity(1);
+    } else {
+      setShowAlert(true);
+    }
   };
 
   const buttonStyle = (color: string) => {
@@ -91,7 +106,14 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
             Zostało 10+ sztuk w magazynie
           </p>
           <div className="color-buttons">
-            <p className="py-2 font-light">Kolor</p>
+            <p className="py-2 font-light">
+              Kolor{" "}
+              <span
+                className={`text-red-500 ${showAlert ? "visible" : "hidden"}`}
+              >
+                (wybierz kolor)
+              </span>
+            </p>
             {thumbnails.map((thumbnail, index) => (
               <button
                 key={index}
@@ -103,7 +125,7 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
             ))}
           </div>
           <div className="flex items-center my-10">
-            <label className="mr-2 font-light">Ilość:</label>
+            <label className="mr-2 font-light">Ilość</label>
             <input
               type="number"
               min="1"
@@ -113,14 +135,14 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
             />
           </div>
           <button
-            className="bg-green-400 hover:bg-green-300 text-white font-semibold w-10/12 py-2 rounded-md mt-4"
+            className="bg-green-500 hover:bg-green-300 text-white font-semibold w-10/12 py-2 rounded-md mt-4"
             onClick={handleAddToCart}
           >
             Dodaj do koszyka
           </button>
         </div>
       </div>
-      <div className="bg-green-600 col-span-2 text-center my-16 py-10 text-white">
+      <div className="bg-green-700 col-span-2 text-center my-16 py-10 text-white">
         <h1 className="text text-4xl font-bold">
           Pokonaj letnie upały w tym roku!
         </h1>
@@ -133,8 +155,9 @@ const Aircooler: React.FC<Props> = ({ menuCart, setMenuCart }) => {
           <img
             key={index}
             src={photo.url}
-            className="w-full h-auto"
+            className="w-full h-auto opacity-0"
             alt="Description"
+            style={{ animationDelay: `${index * 0.5}s` }}
           />
         ))}
       </div>

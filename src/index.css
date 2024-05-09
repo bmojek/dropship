@@ -27,11 +27,23 @@
     }
   }
   
-  /* Apply animation to the cart container */
+
   .slide-in {
     animation: slideIn 0.5s ease forwards;
   }
   
   .slide-out {
     animation: slideOut 0.5s ease forwards;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .mainApp img {
+    animation: fadeIn 1s ease forwards;
   }
