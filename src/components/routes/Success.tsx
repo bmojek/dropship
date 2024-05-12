@@ -3,7 +3,7 @@ import { CiCircleCheck } from "react-icons/ci";
 import { Link } from "react-router-dom";
 export default function Success() {
   return (
-    <div className="text-center mb-[15%]">
+    <div className="text-center mb-[15.1%]">
       <h2 className="align-middle inline-block text-5xl py-5 text-green-500">
         <CiCircleCheck />
       </h2>

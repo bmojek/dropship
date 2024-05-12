@@ -6,15 +6,14 @@ import { MdEmail } from "react-icons/md";
 export default function Contact() {
   return (
     <div>
-      <img src="images/supp.jpg" className="w-full min-h-72" alt="" />
-      <div className="relative -top-96 ">
-        <h1 className="p-10 text-5xl text-white font-bold">Kontakt</h1>
-        <p className="pl-10 text-white">
-          Jeżeli masz jakieś pytania skontaktuj się z nami!
-        </p>
-      </div>
+      <img
+        src="images/suppimg.jpg"
+        className="w-full min-h-[250px] object-cover object-left"
+        alt="supp"
+      />
+
       <div className="grid gap-20 grid-cols-1  lg:grid-cols-2 w-10/12 mx-auto">
-        <div className="h-96 bg-white border-2 rounded-xl -my-0 lg:-my-64 z-50 text-center">
+        <div className="h-96 bg-white border-2 rounded-xl my-10 lg:-my-24 z-50 text-center">
           <a
             className="inline-block pt-10  text-pink-600"
             target="_blank"
@@ -38,7 +37,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="h-96 bg-white border-2 rounded-xl -my-64 mb-11 z-50 text-center">
+        <div className="h-96 bg-white border-2 rounded-xl -my-24 mb-11 z-50 text-center">
           <MdEmail className="inline-block mt-10 text-6xl" />
           <h1 className="pt-10 font-bold">Napisz do nas email</h1>
           <p className="px-12 pt-10">

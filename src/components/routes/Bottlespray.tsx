@@ -4,11 +4,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CartContext } from "../contexts/CartContext";
 import {
-  bottleBlack,
-  bottleBlue,
-  bottleGreen,
-  bottlePink,
-  bottlePinkBlue,
+  bottleBlackLive,
+  bottleBlueLive,
+  bottleGreenLive,
+  bottlePinkLive,
+  bottlePinkBlueLive,
 } from "../types/priceIdStripe";
 
 interface Props {
@@ -48,11 +48,11 @@ const Bottlespray: React.FC<Props> = ({ menuCart, setMenuCart }) => {
   };
 
   const priceIds: Record<string, string> = {
-    czarny: bottleBlack,
-    niebieski: bottleBlue,
-    zielony: bottleGreen,
-    "niebieski-fiolet": bottlePinkBlue,
-    różowy: bottlePink,
+    czarny: bottleBlackLive,
+    niebieski: bottleBlueLive,
+    zielony: bottleGreenLive,
+    "niebieski-fiolet": bottlePinkBlueLive,
+    różowy: bottlePinkLive,
   };
   const handleAddToCart = () => {
     if (selectedColor) {
@@ -134,15 +134,15 @@ const Bottlespray: React.FC<Props> = ({ menuCart, setMenuCart }) => {
             {thumbnails.map((thumbnail, index) => (
               <button
                 key={index}
-                className={buttonStyle(thumbnail.color)}
+                className={`${buttonStyle(thumbnail.color)} w-36 mt-1`}
                 onClick={() => handleColorChange(index, thumbnail.color)}
               >
                 {thumbnail.color}
               </button>
             ))}
           </div>
-          <div className="flex items-center my-10">
-            <label className="mr-2 font-light">Ilość:</label>
+          <div className="flex items-center my-6">
+            <label className="mr-2 font-light">Ilość</label>
             <input
               type="number"
               min="1"
@@ -157,9 +157,33 @@ const Bottlespray: React.FC<Props> = ({ menuCart, setMenuCart }) => {
           >
             Dodaj do koszyka
           </button>
+          <div className="mt-8 cursor-pointer">
+            <hr />
+            <details>
+              <summary className="py-3 font-semibold">Zwroty</summary>
+              <p>
+                Jeśli wystąpią jakiekolwiek problemy z Twoim zamówieniem, nie
+                wahaj się skontaktować z naszym przyjaznym zespołem obsługi
+                klienta pod adresem support@summerrefresh.com. Z przyjemnością
+                zapewnimy Ci natychmiastowe rozwiązanie i upewnimy się, że
+                będziesz zadowolony z swojego doświadczenia!
+              </p>
+            </details>
+            <hr />
+            <details>
+              <summary className="py-3 font-semibold">
+                Szczegóły dostawy
+              </summary>
+              <p>
+                Zamówienia są realizowane, a następnie wysyłane w ciągu średnio
+                7-12 dni. Wysyłka kurierem InPost.
+              </p>
+            </details>
+            <hr />
+          </div>
         </div>
       </div>
-      <div className="bg-green-700 col-span-2 text-center my-16 py-10 text-white">
+      <div className="bg-green-700 col-span-2 text-center my-6 py-10 text-white">
         <h1 className="text text-4xl font-bold">
           Pokonaj letnie upały w tym roku!
         </h1>

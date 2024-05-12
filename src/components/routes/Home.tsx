@@ -21,7 +21,7 @@ export default function Home() {
         <div>
           <Link to="/bottleSpray">
             <h1 className="text-3xl text-green-600 font-semibold py-4">
-              SprayBottle
+              BottleSpray
             </h1>
             <img
               className="rounded-3xl"

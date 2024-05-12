@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Cancel() {
   return (
-    <div className="text-center mb-[15%]">
+    <div className="text-center mb-[15.1%]">
       <h2 className="align-middle inline-block text-5xl py-5 text-red-500">
         <CiCircleRemove />
       </h2>
